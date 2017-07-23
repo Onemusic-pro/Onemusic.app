@@ -1,0 +1,15 @@
+{
+  "name": "Onemusic",
+  "description": "Listen music online",
+  "main": "views/index.html",
+  "version": "0.1.0",
+  "user-agent": "%name app v.%ver @%osinfo",
+  "window": {
+  	"width": 1064,
+  	"height": 655,
+    "min_width": 628,
+    "min_height": 220,
+    "icon": "assets/icon-16x16.png",
+    "resizable": true
+  }
+}

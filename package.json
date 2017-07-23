@@ -1,0 +1,12 @@
+{
+  "name": "Onemusic",
+  "version": "0.1.0",
+  "devDependencies": {
+    "nw":"*",
+    "nw-builder":"*"
+  },
+  "scripts":{
+    "dev": "nw src/",
+    "prod": "nwbuild --platforms win64,osx64,linux64 --buildDir dist/ --win-ico icons/icn.ico --mac-icns icons/icn.icns src/"
+  }
+}
