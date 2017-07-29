@@ -4,22 +4,31 @@
 	var webview = document.getElementById("webview");
 	
 	var tray = new gui.Tray({
-		icon : '../assets/icon-16x16.png',
-		title: '♫'
+		icon : 'assets/icon-19x16-bw.png',
+		//title: '🔊'
 	});
 
 	var menu = new gui.Menu();
 	
 	menu.append(new gui.MenuItem({
 		type: 'normal',
-		label: 'Onemusic',
-		disabled: true
+		label: '⏯ Resume',
+		click: function() {
+			webview.executeScript("player.play();");
+		}
 	}));
 	menu.append(new gui.MenuItem({
 		type: 'normal',
-		label: 'Play',
+		label: '⏭ Next',
 		click: function() {
-			webview.executeScript("player.play()");
+			webview.executeScript("player.playNext();");
+		}
+	}));
+	menu.append(new gui.MenuItem({
+		type: 'normal',
+		label: '⏮ Previous',
+		click: function() {
+			webview.executeScript("player.playPrevious();");
 		}
 	}));
 	menu.append(new gui.MenuItem({
@@ -27,22 +36,41 @@
 	}));
 	menu.append(new gui.MenuItem({
 		type: 'checkbox',
-		label: 'Show',
+		label: '🔈 Mute',
+		click: function() {
+			if(this.checked==false) {
+				webview.executeScript("player.play()");
+				this.label = '🔈 Mute';
+			} else {
+				webview.executeScript("player.play()");
+				this.label = '🔇 Silent';
+			}
+		}
+	}));
+	menu.append(new gui.MenuItem({
+		type: 'separator'
+	}));
+	menu.append(new gui.MenuItem({
+		type: 'checkbox',
+		label: '🔲 Visible',
+		checked: 'true',
 		click: function() {
 			if(this.checked==false) {
 				ed.unwatch(function(){
-					win.hide();
+					alert("hide the preview");//win.restore();
 				});
+				//this.label = '🔲 Visible';
 			} else {
 				ed.watch(function(){
-					win.show();
+					alert("show the preview");//win.hide();
 				});
+				//this.label = '🔳 Hidden';
 			}
 		}
 	}));
 	menu.append(new gui.MenuItem({
 		type: 'normal',
-		label: 'Quit',
+		label: '❌ Quit',
 		click: function() {
 			win.close();
 		}
@@ -51,7 +79,7 @@
 	tray.menu = menu;
 
 	win.on('minimize', function() {
-		win.show();
+		win.restore();
 		win.hide();
 	});
 
