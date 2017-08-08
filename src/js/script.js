@@ -5,66 +5,104 @@
 	
 	var tray = new gui.Tray({
 		icon : 'assets/icon-19x16-bw.png',
-		//title: '🔊'
+		//title: 'Onemusic'
 	});
 
 	var menu = new gui.Menu();
 	
 	menu.append(new gui.MenuItem({
 		type: 'normal',
-		label: '⏯ Resume',
+		label: '▶️ Play',
 		click: function() {
-			webview.executeScript("player.play();");
+			webview.executeScript("var player=angular.element(document.body).injector().get('player'); player.play();");
+		}
+	}));
+	menu.append(new gui.MenuItem({
+		type: 'normal',
+		label: '⏸ Pause',
+		click: function() {
+			webview.executeScript("var player=angular.element(document.body).injector().get('player'); player.pause();");
 		}
 	}));
 	menu.append(new gui.MenuItem({
 		type: 'normal',
 		label: '⏭ Next',
 		click: function() {
-			webview.executeScript("player.playNext();");
+			webview.executeScript("var player=angular.element(document.body).injector().get('player'); player.playNext();");
 		}
 	}));
 	menu.append(new gui.MenuItem({
 		type: 'normal',
 		label: '⏮ Previous',
 		click: function() {
-			webview.executeScript("player.playPrevious();");
+			webview.executeScript("var player=angular.element(document.body).injector().get('player'); player.playPrevious();");
 		}
 	}));
 	menu.append(new gui.MenuItem({
 		type: 'separator'
 	}));
 	menu.append(new gui.MenuItem({
-		type: 'checkbox',
-		label: '🔈 Mute',
+		type: 'normal',
+		label: '🔇 Mute',
 		click: function() {
-			if(this.checked==false) {
-				webview.executeScript("player.play()");
-				this.label = '🔈 Mute';
-			} else {
-				webview.executeScript("player.play()");
-				this.label = '🔇 Silent';
-			}
+			webview.executeScript("var player=angular.element(document.body).injector().get('player'); player.mute();");
+		}
+	}));
+	menu.append(new gui.MenuItem({
+		type: 'normal',
+		label: '🔈 Unmute',
+		click: function() {
+			webview.executeScript("var player=angular.element(document.body).injector().get('player'); player.unMute();");
+		}
+	}));
+	menu.append(new gui.MenuItem({
+		type: 'normal',
+		label: '📺 Video',
+		click: function() {
+			webview.executeScript("var player=angular.element(document.body).injector().get('player'); player.toggleVideo();");
+		}
+	}));
+	menu.append(new gui.MenuItem({
+		type: 'normal',
+		label: '📃 Lyrics',
+		click: function() {
+			webview.executeScript("var player=angular.element(document.body).injector().get('player'); player.toggleLyrics();");
 		}
 	}));
 	menu.append(new gui.MenuItem({
 		type: 'separator'
 	}));
 	menu.append(new gui.MenuItem({
+		type: 'normal',
+		label: '🗃 Download Lyrics',
+		click: function() {
+			webview.executeScript("var player=angular.element(document.body).injector().get('player'); player.downloadLyrics();");
+		}
+	}));
+	menu.append(new gui.MenuItem({
+		type: 'separator'
+	}));
+	menu.append(new gui.MenuItem({
+		type: 'normal',
+		label: '🖥 Fullscreen',
+		click: function() {
+			webview.executeScript("var player=angular.element(document.body).injector().get('player'); player.goFullScreen();");
+			//win.toggleFullscreen()
+		}
+	}));
+	menu.append(new gui.MenuItem({
 		type: 'checkbox',
-		label: '🔲 Visible',
+		label: '⤵️  Hide',
 		checked: 'true',
 		click: function() {
 			if(this.checked==false) {
 				ed.unwatch(function(){
 					alert("hide the preview");//win.restore();
 				});
-				//this.label = '🔲 Visible';
 			} else {
 				ed.watch(function(){
 					alert("show the preview");//win.hide();
 				});
-				//this.label = '🔳 Hidden';
 			}
 		}
 	}));
