@@ -142,4 +142,8 @@
 		win.hide();
 	});
 
+	gui.App.on('reopen', function() {
+		win.show();
+	});
+
 }());
