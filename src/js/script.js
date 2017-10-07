@@ -10,7 +10,7 @@
 
 	var menu = new gui.Menu();
 	
-	menu.append(new gui.MenuItem({
+	/*menu.append(new gui.MenuItem({
 		type: 'normal',
 		label: '▶️ Play',
 		click: function() {
@@ -81,31 +81,52 @@
 	}));
 	menu.append(new gui.MenuItem({
 		type: 'separator'
+	}));*/
+	
+	menu.append(new gui.MenuItem({
+		type: 'normal',
+		label: '💡 Show',
+		checked: 'true',
+		click: function() {
+			win.show();
+		}
 	}));
+
+	menu.append(new gui.MenuItem({
+		type: 'normal',
+		label: '🕳 Hide',
+		checked: 'true',
+		click: function() {
+			win.restore();
+			win.hide();
+		}
+	}));
+
 	menu.append(new gui.MenuItem({
 		type: 'normal',
 		label: '🖥 Fullscreen',
 		click: function() {
-			webview.executeScript("var player=angular.element(document.body).injector().get('player'); player.goFullScreen();");
-			//win.toggleFullscreen()
+			win.toggleFullscreen();
 		}
 	}));
+
 	menu.append(new gui.MenuItem({
-		type: 'checkbox',
-		label: '⤵️  Hide',
-		checked: 'true',
+		type: 'normal',
+		label: 'ⓗ Hashinglegal',
 		click: function() {
-			if(this.checked==false) {
-				ed.unwatch(function(){
-					alert("hide the preview");//win.restore();
-				});
-			} else {
-				ed.watch(function(){
-					alert("show the preview");//win.hide();
-				});
-			}
+			var hashing = gui.Window.open('https://github.com/CryptoCommunity/hashinglegal/blob/master/LICENSE.md', {
+				position: 'center',
+				width: 1040,
+				height: 900,
+				resizable: false
+			});
 		}
 	}));
+
+	menu.append(new gui.MenuItem({
+		type: 'separator'
+	}));
+
 	menu.append(new gui.MenuItem({
 		type: 'normal',
 		label: '❌ Quit',
