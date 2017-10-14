@@ -4,8 +4,7 @@
 	var webview = document.getElementById("webview");
 	
 	var tray = new gui.Tray({
-		icon : 'assets/icon-19x16-bw.png',
-		//title: 'Onemusic'
+		icon : 'assets/icon-19x16-bw.png'
 	});
 
 	var menu = new gui.Menu();
@@ -14,71 +13,82 @@
 		type: 'normal',
 		label: '▶️ Play',
 		click: function() {
-			webview.executeScript("var player=angular.element(document.body).injector().get('player'); player.play();");
+			webview.executeScript({code:"var player=angular.element(document.body).injector().get('player'); player.play();"});
 		}
 	}));
+
 	menu.append(new gui.MenuItem({
 		type: 'normal',
 		label: '⏸ Pause',
 		click: function() {
-			webview.executeScript("var player=angular.element(document.body).injector().get('player'); player.pause();");
+			webview.executeScript({code:"var player=angular.element(document.body).injector().get('player'); player.pause();"});
 		}
 	}));
+
 	menu.append(new gui.MenuItem({
 		type: 'normal',
 		label: '⏭ Next',
 		click: function() {
-			webview.executeScript("var player=angular.element(document.body).injector().get('player'); player.playNext();");
+			webview.executeScript({code:"var player=angular.element(document.body).injector().get('player'); player.playNext();"});
 		}
 	}));
+
 	menu.append(new gui.MenuItem({
 		type: 'normal',
 		label: '⏮ Previous',
 		click: function() {
-			webview.executeScript("var player=angular.element(document.body).injector().get('player'); player.playPrevious();");
+			webview.executeScript({code:"var player=angular.element(document.body).injector().get('player'); player.playPrevious();"});
 		}
 	}));
+
 	menu.append(new gui.MenuItem({
 		type: 'separator'
 	}));
+
 	menu.append(new gui.MenuItem({
 		type: 'normal',
 		label: '🔇 Mute',
 		click: function() {
-			webview.executeScript("var player=angular.element(document.body).injector().get('player'); player.mute();");
+			webview.executeScript({code:"var player=angular.element(document.body).injector().get('player'); player.mute();"});
 		}
 	}));
+
 	menu.append(new gui.MenuItem({
 		type: 'normal',
 		label: '🔈 Unmute',
 		click: function() {
-			webview.executeScript("var player=angular.element(document.body).injector().get('player'); player.unMute();");
+			webview.executeScript({code:"var player=angular.element(document.body).injector().get('player'); player.unMute();"});
 		}
 	}));
+
 	menu.append(new gui.MenuItem({
 		type: 'normal',
 		label: '📺 Video',
 		click: function() {
-			webview.executeScript("var player=angular.element(document.body).injector().get('player'); player.toggleVideo();");
+			webview.executeScript({code:"var player=angular.element(document.body).injector().get('player'); player.toggleVideo();"});
 		}
 	}));
+
 	menu.append(new gui.MenuItem({
 		type: 'normal',
 		label: '📃 Lyrics',
 		click: function() {
-			webview.executeScript("var player=angular.element(document.body).injector().get('player'); player.toggleLyrics();");
+			webview.executeScript({code:"var player=angular.element(document.body).injector().get('player'); player.toggleLyrics();"});
 		}
 	}));
+
 	menu.append(new gui.MenuItem({
 		type: 'separator'
 	}));
+
 	menu.append(new gui.MenuItem({
 		type: 'normal',
 		label: '🗃 Download Lyrics',
 		click: function() {
-			webview.executeScript("var player=angular.element(document.body).injector().get('player'); player.downloadLyrics();");
+			webview.executeScript({code:"var player=angular.element(document.body).injector().get('player'); player.downloadLyrics();"});
 		}
 	}));
+
 	menu.append(new gui.MenuItem({
 		type: 'separator'
 	}));*/
@@ -111,6 +121,10 @@
 	}));
 
 	menu.append(new gui.MenuItem({
+		type: 'separator'
+	}));
+
+	menu.append(new gui.MenuItem({
 		type: 'normal',
 		label: 'ⓗ Hashinglegal',
 		click: function() {
@@ -131,14 +145,13 @@
 		type: 'normal',
 		label: '❌ Quit',
 		click: function() {
-			win.close();
+			gui.App.quit();
 		}
 	}));
 	
 	tray.menu = menu;
 
-	win.on('minimize', function() {
-		win.restore();
+	win.on('close', function() {
 		win.hide();
 	});
 
